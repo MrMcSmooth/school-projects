@@ -61,7 +61,8 @@ public class Project1 {
 					mostFrequent(nameList);
 					continue;
 				case 9:
-					newList();
+					System.out.print("Enter a set of names, with each name seperated by comma: ");
+					nameList = newList(names);
 					continue;
 				case 0:
 					System.out.println("Bye Bye!");
@@ -105,6 +106,55 @@ public class Project1 {
 
 	static void nameStats(String[] userString)
 	{
+		int namesLength = userString.length;
+		int letterCount = 0;
+		double avgLength = 0;
+		String shortestName = userString[0];
+		String longestName = userString[0];
+		double standardDeviation = 0;
+		
+		int greatestLength = userString[0].length();
+		int leastLength = userString[0].length();
+		if(userString[0].contains(" "))
+		{
+			greatestLength--;
+			leastLength--;
+		}
+		for (String i : userString)
+		{
+			int iLength = i.length();
+			if(i.contains(" "))
+			{
+				iLength--;
+			}
+			
+			letterCount += iLength;
+			if (greatestLength < iLength)
+			{
+				longestName = i;
+			} else if(leastLength > iLength)
+			{
+				shortestName = i;
+			}
+		}
+		avgLength = letterCount / 1.0 / namesLength;
+		for(String i : userString)
+		{
+			int iLength = i.length();
+			if(i.contains(" "))
+			{
+				iLength--;
+			}
+			
+			standardDeviation += Math.pow(iLength - avgLength, 2);
+		}
+		standardDeviation = Math.sqrt(standardDeviation / letterCount);
+		System.out.println("Name Count: " + namesLength);
+		System.out.println("Letter Count Total: " + letterCount);
+		System.out.println("Avg Name Length: " + avgLength);
+		System.out.println("Shortest Name: " + shortestName);
+		System.out.println("Longest Name: " + longestName);
+		System.out.printf("Population Standard Deviation: %.2f", standardDeviation);
 		
 	} 
 
@@ -112,12 +162,14 @@ public class Project1 {
 	{
 		for(int ii = 0; ii <= userString.length - 1; ii++)
 		{
+			int length = userString[ii].length();
 			if(userString[ii].contains(" "))
-			{//make new string without space
-				
-			} else
 			{
-				
+				length--;
+			}
+			if(length % 2 == 0) 
+			{
+				System.out.println(userString[ii]);
 			}
 		}//end ii
 	}
@@ -126,32 +178,69 @@ public class Project1 {
 	{
 		for(int ii = 0; ii <= userString.length - 1; ii++)
 		{
+			int length = userString[ii].length();
 			if(userString[ii].contains(" "))
-			{//make new string without space
-				
-			} else 
 			{
-				
+				length--;
+			}
+			if(length % 2 != 0) 
+			{
+				System.out.println(userString[ii]);
 			}
 		}//end ii
 	}
 
 	static void nonCapitals(String[] userString)
 	{
+	
 		for(int ii = 0; ii <= userString.length - 1; ii++)
 		{
-			
+			String[] capsCheck = userString[ii].split(" ");
+			for(String lower : capsCheck)
+			{
+				if(!Character.isUpperCase(lower.charAt(0)))
+				{
+					System.out.println(lower);
+				}//end if
+			}//end for each
 		}//end ii
 	}
 
 	static void mostFrequent(String[] userString)
 	{
-
+		int greatestFreq = 0;
+		String mostFrequent = "";
+		for(String i : userString)
+		{
+			int frequency = 0;
+			for(String j : userString)
+			{
+				if(i.equalsIgnoreCase(j))
+				{
+					frequency++;
+					if(frequency >= greatestFreq)
+					{
+						greatestFreq = frequency;
+						mostFrequent = i;
+					}//end freq
+				}//end compare
+			}//end j
+		}//end i
+		if (mostFrequent.contains("") && greatestFreq >= 2) {
+			System.out.println("Most Frequent Name: " + mostFrequent);
+		} else
+		{
+			System.out.println("No Most Frequent Name");
+		}
+		
 	}
 
-	static void newList()
-	{
-
+	static String[] newList(String names)
+	{	
+		Scanner scnr = new Scanner(System.in);
+		names = scnr.nextLine();
+		String[] nameList = names.split(",");
+		return nameList;
 	}
 
 }//end class
