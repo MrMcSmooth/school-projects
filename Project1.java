@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class Project1 {
 
 	public static void main(String[] args) {
@@ -76,12 +77,21 @@ public class Project1 {
 
 	}//end main
 
+	/**
+	 * namesOrdered organizes a give userString array into 
+	 * alphabetical order ignoring case
+	 * @param userString is a string split into an array
+	 */
 	static void namesOrdered(String[] userString)
 	{
 		Arrays.sort(userString, String.CASE_INSENSITIVE_ORDER);
 		System.out.print(Arrays.toString(userString));
 	}//end namesOrdered
 
+	/**
+	 * fullNames prints all full names including a space 
+	 * @param userString is a string split into an array
+	 */
 	static void fullNames(String[] userString)
 	{
 		for(int ii = 0; ii <= userString.length - 1; ii++)
@@ -93,6 +103,10 @@ public class Project1 {
 		}//end ii
 	}//end fullNames
 
+	/**
+	 * singleNames prints all one word names
+	 * @param userString is a string split into an array
+	 */
 	static void singleNames(String[] userString)
 	{
 		for(int ii = 0; ii <= userString.length - 1; ii++)
@@ -104,6 +118,14 @@ public class Project1 {
 		}//end ii
 	}//end singleNames
 
+	/**
+	 * nameStats prints out multiple pieces of about a name set
+	 * including: the total number of items in the set, the total 
+	 * character length, the average name length, the shortest name, 
+	 * and the longest name, then finally returns the population
+	 * standard deviation between the whole set
+	 * @param userString is a string split into an array
+	 */
 	static void nameStats(String[] userString)
 	{
 		int namesLength = userString.length;
@@ -148,16 +170,20 @@ public class Project1 {
 			
 			standardDeviation += Math.pow(iLength - avgLength, 2);
 		}
-		standardDeviation = Math.sqrt(standardDeviation / letterCount);
+		standardDeviation = Math.sqrt(standardDeviation / namesLength);
 		System.out.println("Name Count: " + namesLength);
 		System.out.println("Letter Count Total: " + letterCount);
 		System.out.println("Avg Name Length: " + avgLength);
 		System.out.println("Shortest Name: " + shortestName);
 		System.out.println("Longest Name: " + longestName);
-		System.out.printf("Population Standard Deviation: %.2f", standardDeviation);
+		System.out.printf("Population Standard Deviation: %.2f%n", standardDeviation);
 		
 	} 
 
+	/**
+	 * evenNames prints all names with an even length, excluding spaces
+	 * @param userString is a string split into an array
+	 */
 	static void evenNames(String[] userString)
 	{
 		for(int ii = 0; ii <= userString.length - 1; ii++)
@@ -174,6 +200,10 @@ public class Project1 {
 		}//end ii
 	}
 
+	/**
+	 * oddNames prints all names with an odd length, excluding spaces
+	 * @param userString is a string split into an array
+	 */
 	static void oddNames(String[] userString)
 	{
 		for(int ii = 0; ii <= userString.length - 1; ii++)
@@ -190,6 +220,11 @@ public class Project1 {
 		}//end ii
 	}
 
+	/**
+	 * nonCapitals prints all names that are non-capital, including
+	 * those put in full names
+	 * @param userString is a string split into an array
+	 */
 	static void nonCapitals(String[] userString)
 	{
 	
@@ -206,6 +241,12 @@ public class Project1 {
 		}//end ii
 	}
 
+	/**
+	 * mostFrequent prints the most frequent name of the data set,
+	 * while printing that there is no frequent name if no name
+	 * repeats
+	 * @param userString is a string split into an array
+	 */
 	static void mostFrequent(String[] userString)
 	{
 		int greatestFreq = 0;
@@ -226,7 +267,7 @@ public class Project1 {
 				}//end compare
 			}//end j
 		}//end i
-		if (mostFrequent.contains("") && greatestFreq >= 2) {
+		if (greatestFreq >= 2) {
 			System.out.println("Most Frequent Name: " + mostFrequent);
 		} else
 		{
@@ -235,6 +276,13 @@ public class Project1 {
 		
 	}
 
+	/**
+	 * newList takes in a new set of names to be used in a 
+	 * program where you need a set of names each separated into their
+	 * own element
+	 * @param names original set of names to be replaced
+	 * @return new set of names in String array
+	 */
 	static String[] newList(String names)
 	{	
 		Scanner scnr = new Scanner(System.in);
