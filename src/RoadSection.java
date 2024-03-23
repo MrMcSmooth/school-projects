@@ -1,6 +1,7 @@
+import java.util.*;
 
-public class RoadSection {
-	
+public class RoadSection
+{	
 	private RoadVolume roadVolume;
 	private RoadSpeed roadSpeed;
 	private int volumeTotal;
@@ -16,23 +17,50 @@ public class RoadSection {
 		this.setSpeedAvg(calcSpeedAvg());
 	}
 	
+	public String getFileData()
+	{
+		String fileData = roadVolume.getFileData();
+	
+		//removing date and time from speed data
+		String temp = roadSpeed.getFileData();		
+		String[] tempArr = temp.split(",");
+		
+		String[] newTempArr = new String[tempArr.length - 2];
+		
+		for(int i = 2; i < tempArr.length; i++)
+		{
+			String speedString = tempArr[i];
+			fileData = fileData.concat("," + speedString);
+		}
+		
+		
+		
+		
+		//v total
+		//v avg
+		//s avg
+		
+		
+		return fileData;
+	}
+	
 	private int calcVolumeTotal()
 	{
-		int returnMe;
+		int returnMe = 0;
 		
 		return returnMe;
 	}
 	
 	private double calcVolumeAvg()
 	{
-		double returnMe;
+		double returnMe = 0;
 		
 		return returnMe;
 	}
 	
 	private double calcSpeedAvg()
 	{
-		double returnMe;
+		double returnMe = 0;
 		
 		return returnMe;
 	}
@@ -85,4 +113,4 @@ public class RoadSection {
 	public void setSpeedAvg(double speedAvg){
 		this.speedAvg = speedAvg;
 	}
-}
+}//end class

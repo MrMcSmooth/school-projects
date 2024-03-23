@@ -3,7 +3,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
-public class Project2 {
+public class Project2
+{
 
 	public static void main(String[] args)
 	{
@@ -44,7 +45,8 @@ public class Project2 {
 		{
 			System.out.println("Enter Path and Name of Speed Data File");
 			
-			try {
+			try
+			{
 				fileName = scnr.nextLine();
 				speedData = FileHandler.loadSpeedData(fileName);
 				f = true;
@@ -57,16 +59,35 @@ public class Project2 {
 				String msg = e.getMessage();
 				System.out.println(msg);
 				continue;
-			}
+			}	
 		}//end while
 		
+		//create road section data
+		createRoadSections(volumeData, speedData);
 		
 	}//end main
 	
 	
 	public static void createRoadSections(ArrayList<RoadVolume> volumeList, ArrayList<RoadSpeed> speedList)
 	{
+		ArrayList<RoadSection> sectionData = new ArrayList<RoadSection>();
+		for(int i = 0; i < volumeList.size(); i++)
+		{
+			for(int j = 0; j < speedList.size(); j++)
+			{
+				if(volumeList.get(i).getDate().compareTo(speedList.get(j).getDate()) == 0 && volumeList.get(i).getTime().equals(speedList.get(j).getTime()))
+				{
+					RoadSection newRoadSection = new RoadSection(volumeList.get(i), speedList.get(j));
+					sectionData.add(newRoadSection);
+				}//end if
+			}//end j
+		}//end i
 		
-	}
+		FileHandler.writeRoadSectionData(sectionData);
+		
+	}//end method
+	
+	//Volume_Data.csv
+	//Speed_Data.csv
 
-}
+}//end class

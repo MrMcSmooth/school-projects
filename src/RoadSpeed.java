@@ -1,7 +1,8 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RoadSpeed {
-	
+public class RoadSpeed
+{
 	private Date date;
 	private String time = new String();
 	private double speedSensor1;
@@ -17,9 +18,18 @@ public class RoadSpeed {
 	
 	public String getFileData()
 	{
-		String returnMe = new String();
+		Date date = this.date;
+		SimpleDateFormat newFormat = new SimpleDateFormat("MM/dd/yyyy"); 
+		String strDate = newFormat.format(date);
+		String fileData = strDate;
+		//adding time
+		fileData = fileData.concat("," + getTime());
+		//adding sensors
+		String vs1 = Double.toString(getSpeedSensor1());
+		String vs2 = Double.toString(getSpeedSensor2());
+		fileData = fileData.concat("," + vs1).concat("," + vs2);
 		
-		return returnMe;
+		return fileData;
 	}
 
 	public Date getDate()
@@ -61,5 +71,4 @@ public class RoadSpeed {
 	{
 		this.speedSensor2 = speedSensor2;
 	}
-
-}
+}//end class

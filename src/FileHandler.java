@@ -3,7 +3,8 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 
-public class FileHandler {
+public class FileHandler
+{
 	
 	public static ArrayList<RoadVolume> loadVolumeData(String fileName) throws FileNotFoundException, ParseException
 	{
@@ -12,11 +13,11 @@ public class FileHandler {
 			File f = new File(fileName);
 			Scanner fr = new Scanner(f);
 			
-			String line = fr.nextLine();
+			String fileData = fr.nextLine();
 			
 			while(fr.hasNextLine())
 			{
-				line = fr.nextLine();
+				String line = fr.nextLine();
 				String[] temp = line.split(",");
 				
 				SimpleDateFormat currentFormat = new SimpleDateFormat("MM/dd/yy");
@@ -34,7 +35,6 @@ public class FileHandler {
 				RoadVolume newRoadVolume = new RoadVolume(newDate, temp[1], vs1, vs2, vs3, vs4);
 				volumeData.add(newRoadVolume);
 			}
-		
 		return volumeData;
 	}
 	
@@ -45,11 +45,11 @@ public class FileHandler {
 		File f = new File(fileName);
 		Scanner fr = new Scanner(f);
 		
-		String line = fr.nextLine();
+		String fileData = fr.nextLine();
 		
 		while(fr.hasNextLine())
 		{
-			line = fr.nextLine();
+			String line = fr.nextLine();
 			String[] temp = line.split(",");
 			
 			SimpleDateFormat currentFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -65,12 +65,26 @@ public class FileHandler {
 			RoadSpeed newRoadSpeed = new RoadSpeed(newDate, temp[1], vs1, vs2);
 			speedData.add(newRoadSpeed);
 		}
-		
 		return speedData;
 	}
 	
 	public static void writeRoadSectionData(ArrayList<RoadSection> sectionList)
 	{
-		
+		try
+		{
+			FileWriter fw = new FileWriter("Road_Section_Data.csv", true);
+			fw.write("Date,Time,Volume_Sensor_2003,Volume_Sensor_2004,Volume_Sensor_2005,Volume_Sensor,Speed_Sensor_2282,Speed_Sensor_2293,Volume_Total,Volume_Avg,Speed_Avg");
+			for(int i = 0; i < sectionList.size(); i++)
+			{
+				fw.append("\n" + sectionList.get(i).getFileData());
+			}
+			fw.close();
+			System.out.println("Road Section Data Created");
+		} catch (IOException e)
+		{
+			
+			String msg = e.getMessage();
+			System.out.println(msg);
+		}
 	}
 }//end class

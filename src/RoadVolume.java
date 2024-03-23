@@ -1,7 +1,8 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RoadVolume {
-	
+public class RoadVolume
+{
 	private Date date;
 	private String time = new String();
 	private int volumeSensor1;
@@ -20,8 +21,20 @@ public class RoadVolume {
 	}
 	
 	public String getFileData()
-	{
-		String fileData = new String();
+	{	
+		//adding date to str
+		Date date = this.date;
+		SimpleDateFormat newFormat = new SimpleDateFormat("MM/dd/yyyy"); 
+		String strDate = newFormat.format(date);
+		String fileData = strDate;
+		//adding time
+		fileData = fileData.concat("," + getTime());
+		//adding sensors
+		String vs1 = Integer.toString(getVolumeSensor1());
+		String vs2 = Integer.toString(getVolumeSensor2());
+		String vs3 = Integer.toString(getVolumeSensor3());
+		String vs4 = Integer.toString(getVolumeSensor4());
+		fileData = fileData.concat("," + vs1).concat("," + vs2).concat("," + vs3).concat("," + vs4);
 		
 		return fileData;
 	}
@@ -85,6 +98,4 @@ public class RoadVolume {
 	{
 		this.volumeSensor4 = volumeSensor4;
 	}
-
-	
-}
+}//end class
