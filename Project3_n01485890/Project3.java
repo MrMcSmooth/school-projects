@@ -3,17 +3,40 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * The Class Project3.
+ */
 public class Project3 {
 	
+	/** The employee file name. */
 	static String employeeFileName = "employee_data.csv";
+	
+	/** The tier 1 ticket file name. */
 	static String tier1TicketFileName = "tier1_ticket_data.csv";
+	
+	/** The tier 2 ticket file name. */
 	static String tier2TicketFileName = "tier2_ticket_data.csv";
+	
+	/** The work order file name. */
 	static String workOrderFileName = "workorder_data.csv";
+	
+	/** The employee list. */
 	static ArrayList<Employee> employeeList = new ArrayList<Employee>();
+	
+	/** The tier 1 ticket list. */
 	static Queue<Ticket> tier1TicketList = new LinkedList<Ticket>();
+	
+	/** The tier 2 ticket list. */
 	static Queue<Ticket> tier2TicketList = new LinkedList<Ticket>();
+	
+	/** The work order list. */
 	static ArrayList<WorkOrder> workOrderList = new ArrayList<WorkOrder>();
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args)
 	{
 		
@@ -40,37 +63,62 @@ public class Project3 {
 		
 	}
 	
+	/**
+	 * Creates the work orders.
+	 */
 	public static void createWorkOrders()
 	{
 		System.out.println("Creating Work Orders");
-		for(int i = 0; i < tier2TicketList.size(); i++)
+		
+		Queue<Employee> t1Emp = new LinkedList<Employee>();
+		Queue<Tier2Employee> t2Emp = new LinkedList<Tier2Employee>();
+		
+		for(Employee e : employeeList)
 		{
-			for(int j = 0; j < employeeList.size(); j++)
+			if(e instanceof Tier2Employee)
 			{
-				if(employeeList.get(j) instanceof Tier2Employee)
-				{
-					Tier2Employee empCast = (Tier2Employee)employeeList.get(j);
-					WorkOrder newWorkOrder = new WorkOrder(empCast, tier2TicketList.poll(), CurrentDate.getCurrentDate());
-					employeeList.remove(j);
-					workOrderList.add(newWorkOrder);
-					break;
-				}
+				Tier2Employee temp = (Tier2Employee) e;
+				t2Emp.add(temp);
+			}
+			else
+			{
+				t1Emp.add(e);
 			}
 		}
 		
-		for(int i = 0; i < tier1TicketList.size(); i++)
+		int size = tier2TicketList.size();
+		
+		for(int i = 0; i < size; i++)
 		{
-			for(int j = 0; j < employeeList.size(); j++)
+			for(;;)
 			{
-				if(employeeList.get(j) instanceof Tier2Employee)
-				{
-				} else
-				{
-					WorkOrder newWorkOrder = new WorkOrder(employeeList.get(j), tier1TicketList.poll(), CurrentDate.getCurrentDate());
-					employeeList.remove(j);
-					workOrderList.add(newWorkOrder);
-					break;
-				}
+				Tier2Employee temp = t2Emp.poll();
+				Ticket tTemp = tier2TicketList.poll();
+				
+				WorkOrder newWorkOrder = new WorkOrder(temp, tTemp, CurrentDate.getCurrentDate());
+				
+				t2Emp.offer(temp);
+				workOrderList.add(newWorkOrder);
+				break;
+				
+			}
+		}
+		
+		size = tier1TicketList.size();
+		
+		for(int i = 0; i < size; i++)
+		{
+		
+			for(;;)
+			{
+				Employee temp = t1Emp.poll();
+				Ticket tTemp = tier1TicketList.poll();
+				
+				WorkOrder newWorkOrder = new WorkOrder(temp, tTemp, CurrentDate.getCurrentDate());
+				t1Emp.offer(temp);
+				workOrderList.add(newWorkOrder);
+				
+				break;
 			}
 		}
 

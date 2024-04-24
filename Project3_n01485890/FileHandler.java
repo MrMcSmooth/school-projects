@@ -6,8 +6,17 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+/**
+ * The Class FileHandler.
+ */
 public class FileHandler
 {
+	
+	/**
+	 * Writes fileData to new Work Order file.
+	 *
+	 * @param workOrderFileName the work order file name
+	 */
 	public static void writeData(String workOrderFileName)
 	{
 		System.out.println("Writing Work Order Data File");
@@ -34,6 +43,12 @@ public class FileHandler
 		}
 	}
 	
+	/**
+	 * Reads employee data.
+	 *
+	 * @param employeeFileName the employee file name
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	public static void readEmployeeData(String employeeFileName) throws FileNotFoundException
 	{
 		System.out.println("Loading Employee Data");
@@ -75,6 +90,13 @@ public class FileHandler
 		}
 	}
 	
+	/**
+	 * Reads ticket data.
+	 *
+	 * @param ticketFileName the ticket file name
+	 * @return the linked list
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	public static LinkedList<Ticket> readTicketData(String ticketFileName) throws FileNotFoundException
 	{
 		System.out.println("Loading Ticket Data");
@@ -114,6 +136,11 @@ public class FileHandler
 		return ticketList;
 	}
 	
+	/**
+	 * Logs time and what is written.
+	 *
+	 * @param log the log
+	 */
 	private static void logger(String log)
 	{
 		try
