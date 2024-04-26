@@ -19,7 +19,7 @@ public class FileHandler
 	 */
 	public static void writeData(String workOrderFileName)
 	{
-		System.out.println("Writing Work Order Data File");
+		
 		try
 		{
 			FileWriter fw = new FileWriter(workOrderFileName, true);
@@ -51,7 +51,7 @@ public class FileHandler
 	 */
 	public static void readEmployeeData(String employeeFileName) throws FileNotFoundException
 	{
-		System.out.println("Loading Employee Data");
+		
 		
 		File f = new File(employeeFileName);
 		Scanner fr = new Scanner(f);
@@ -99,7 +99,6 @@ public class FileHandler
 	 */
 	public static LinkedList<Ticket> readTicketData(String ticketFileName) throws FileNotFoundException
 	{
-		System.out.println("Loading Ticket Data");
 		
 		File f = new File(ticketFileName);
 		Scanner fr = new Scanner(f);
@@ -107,6 +106,7 @@ public class FileHandler
 		String fileHeader = fr.nextLine();
 		
 		LinkedList<Ticket> ticketList = new LinkedList<Ticket>();
+		
 		
 		logger("Loading Ticket Data");
 		
@@ -143,6 +143,7 @@ public class FileHandler
 	 */
 	private static void logger(String log)
 	{
+		
 		try
 		{
 			FileWriter fw = new FileWriter("log.txt", true);

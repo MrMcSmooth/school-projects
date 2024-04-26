@@ -60,7 +60,11 @@ public class Project3 {
 		try
 		{
 			
+			System.out.println("Loading Employee Data");
 			FileHandler.readEmployeeData(employeeFileName);
+			
+			
+			System.out.println("Loading Ticket Data");
 			tier1TicketList = FileHandler.readTicketData(tier1TicketFileName);
 			tier2TicketList = FileHandler.readTicketData(tier2TicketFileName);
 
@@ -73,6 +77,8 @@ public class Project3 {
 		}
 		
 		createWorkOrders();
+		
+		System.out.println("Writing Work Order Data File");
 		FileHandler.writeData(workOrderFileName);
 		
 		
