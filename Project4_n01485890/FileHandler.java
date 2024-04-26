@@ -7,11 +7,13 @@ import java.util.Date;
 public class FileHandler {
 	
 	private String surveyFile = "survey_results.csv";
-	private FileWriter fileOutput = new FileWriter(surveyFile);
-	private PrintWriter printWriter = new PrintWriter(fileOutput);
+	private FileWriter fileOutput;
+	private PrintWriter printWriter;
 	
 	public FileHandler() throws IOException
 	{
+		fileOutput = new FileWriter(surveyFile);
+		printWriter = new PrintWriter(fileOutput);
 		printWriter.println("DateTime,FirstName,LastName,PhoneNumber,Email,Sex,Water,Meals,Wheat,Sugar,Dairy,Miles,Weight");
 	}
 	
