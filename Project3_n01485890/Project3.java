@@ -1,3 +1,18 @@
+/*
+ * Author: Michael McCarthy
+ * Course: COP3503
+ * Project #: 3
+ * Title: Objects & Classes
+ * Due Date: 4/28/2024
+ * 
+ * Takes in ticket and employee data, than outputs a file that provides the
+ * employee workorder related to the tickets
+ */
+
+
+
+
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
