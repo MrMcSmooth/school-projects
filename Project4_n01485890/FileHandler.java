@@ -39,7 +39,7 @@ public class FileHandler {
 	{
 		printWriter = new PrintWriter(fileOutput, true);
 		printWriter.println(getCurrentDate() + "," + surveyData);
-		//printWriter.close();
+		
 	}
 	
 	/**

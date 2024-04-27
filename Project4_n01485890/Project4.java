@@ -25,7 +25,7 @@ public class Project4 {
 			try {
 				CustomJFrame frame = new CustomJFrame();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 
