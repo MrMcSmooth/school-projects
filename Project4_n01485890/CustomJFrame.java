@@ -6,9 +6,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.*;
-import javax.swing.GroupLayout.Group;
 import javax.swing.text.NumberFormatter;
 
 
