@@ -114,14 +114,18 @@ public class CustomJFrame extends JFrame
 	
 	/**
 	 * Instantiates a new custom J frame.
-	 * Starts Dietary Survey
+	 * Starts Dietary Survey GUI
 	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public CustomJFrame() throws IOException
+	public CustomJFrame()
 	{
 		
-		fileHandler = new FileHandler();
+		try {
+			fileHandler = new FileHandler();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		this.setLayout(new GridBagLayout());
 		this.setSize(300,400);
@@ -130,12 +134,14 @@ public class CustomJFrame extends JFrame
 		gbc.insets = new Insets(10, 10, 10, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
+		
 		headingLabel = new JLabel("Personal Information");
 		this.add(headingLabel, gbc);
 		
 		
 		gbc.gridx = 0;
 		gbc.gridy = 1;
+		
 		firstNameLabel = new JLabel("First Name:");
 		this.add(firstNameLabel, gbc);
 		
@@ -147,6 +153,7 @@ public class CustomJFrame extends JFrame
 		
 		gbc.gridx = 0;
 		gbc.gridy = 2;
+		
 		lastNameLabel = new JLabel("Last Name:");
 		this.add(lastNameLabel, gbc);
 		
@@ -158,34 +165,37 @@ public class CustomJFrame extends JFrame
 		
 		gbc.gridx = 0;
 		gbc.gridy = 3;
+		
 		phoneNumberLabel = new JLabel("Phone Number:");
 		this.add(phoneNumberLabel, gbc);
 		
-		gbc.gridx = 1;
-		gbc.gridy = 3;
 		phoneNumberTextField = new JTextField(15);
 		phoneNumberTextField.setName("phoneNumber");
+		gbc.gridx = 1;
+		gbc.gridy = 3;
 		this.add(phoneNumberTextField, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 4;
+		
 		emailLabel = new JLabel("Email:");
 		this.add(emailLabel, gbc);
 		
-		gbc.gridx = 1;
-		gbc.gridy = 4;
 		emailTextField = new JTextField(15);
 		emailTextField.setName("email");
 		emailTextField.addActionListener(new InnerActionListener());
+		gbc.gridx = 1;
+		gbc.gridy = 4;
 		this.add(emailTextField, gbc);
 		
 		gbc.gridx = 0;
 		gbc.gridy = 5;
+		
 		genderLabel = new JLabel("Sex:");
 		this.add(genderLabel, gbc);
 		
 		
-		gbc.insets = new Insets(5, 0, 5, 5);
+		gbc.insets = new Insets(1, 1, 1, 1);
 		radioButtonGroup = new ButtonGroup();
 		
 		maleRadioButton = new JRadioButton("Male");
@@ -200,7 +210,7 @@ public class CustomJFrame extends JFrame
 		preferRadioButton.setName("Prefer not to say");
 		radioButtonGroup.add(preferRadioButton);
 		
-
+		gbc.anchor = GridBagConstraints.WEST;
 		gbc.gridx = 1;
 		gbc.gridy = 5;
 		this.add(maleRadioButton, gbc);
@@ -216,45 +226,51 @@ public class CustomJFrame extends JFrame
 		gbc.insets = new Insets(10, 10, 10, 10);
 		gbc.gridx = 0;
 		gbc.gridy = 8;
+		
 		dietaryLabel = new JLabel("Dietary Questions");
 		this.add(dietaryLabel, gbc);
 		
+		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.gridwidth = 3;
 		gbc.gridx = 0;
 		gbc.gridy = 9;
+		
 		waterLabel = new JLabel("How many cups of water on average do you drink a day?");
 		this.add(waterLabel, gbc);
 		
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(15, 0, 50, 1);
 		waterIntakeSpinner = new JSpinner(spinnerModel);
 		waterIntakeSpinner.setName("water");
+		
 		gbc.gridx = 0;
 		gbc.gridy = 10;
 		this.add(waterIntakeSpinner, gbc);
 		
 
-		
 		gbc.gridx = 0;
 		gbc.gridy = 11;
+		
 		mealsLabel = new JLabel("How many meals on average do you eat a day?");
 		this.add(mealsLabel, gbc);
 		
-		gbc.gridx = 0;
-		gbc.gridy = 12;
 		mealSlider = new JSlider(0, 10, 3);
 		mealSlider.setName("meal");
 		mealSlider.setMajorTickSpacing(1);
 		mealSlider.setPaintTicks(true);
 		mealSlider.setPaintLabels(true);
+		gbc.gridx = 0;
+		gbc.gridy = 12;
 		this.add(mealSlider, gbc);
 		
 		
 		gbc.gridx = 0;
 		gbc.gridy = 13;
+		
 		checkBoxLabel = new JLabel("Do any of these meals regularly contain:");
 		this.add(checkBoxLabel, gbc);
 		
-		gbc.insets = new Insets(1, 10, 1, 0);
+		gbc.insets = new Insets(1, 10, 1, 1);
+		gbc.anchor = GridBagConstraints.EAST;
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
 		gbc.gridy = 14;
@@ -262,65 +278,79 @@ public class CustomJFrame extends JFrame
 		dairyCheckBox.setName("dairy");
 		this.add(dairyCheckBox, gbc);
 		
-		gbc.insets = new Insets(1, 0, 1, 0);
+		gbc.insets = new Insets(1, 1, 1, 1);
+		gbc.anchor = GridBagConstraints.WEST;
 		gbc.gridx = 1;
 		gbc.gridy = 14;
 		wheatCheckBox = new JCheckBox("Wheat");
 		wheatCheckBox.setName("wheat");
 		this.add(wheatCheckBox, gbc);
 		
-		gbc.insets = new Insets(1, 0, 1, 10);
-		gbc.gridx = 2;
+		gbc.insets = new Insets(1, 1, 1, 10);
+		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.gridx = 1;
 		gbc.gridy = 14;
 		sugarCheckBox = new JCheckBox("Sugar");
 		sugarCheckBox.setName("sugar");
 		this.add(sugarCheckBox, gbc);
 		
 		gbc.insets = new Insets(10, 10, 10, 10);
+		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.gridwidth = 3;
 		gbc.gridx = 0;
 		gbc.gridy = 15;
+		
 		walkLabel = new JLabel("On average how many miles do you walk in a day?");
 		this.add(walkLabel, gbc);
 		
-		gbc.gridx = 0;
-		gbc.gridy = 16;
 		walkComboBox = new JComboBox(walkOptions);
 		walkComboBox.setName("walk");
+		
+		gbc.gridx = 0;
+		gbc.gridy = 16;
 		this.add(walkComboBox, gbc);
 		
 		
 		gbc.gridx = 0;
 		gbc.gridy = 17;
+		
 		weightLabel = new JLabel("How much do you weigh?");
 		this.add(weightLabel, gbc);
 		
 		
 		gbc.gridx = 0;
 		gbc.gridy = 18;
+		
+		
 		NumberFormatter weightFormat = new NumberFormatter();
 		weightFormat.setValueClass(Integer.class);
 		weightFormat.setAllowsInvalid(false);
 		weightFormat.setMaximum(999);
 		weightFormat.setMinimum(1);
+		
 		weightFormattedTextField = new JFormattedTextField(weightFormat);
 		weightFormattedTextField.setName("weight");
 		weightFormattedTextField.setColumns(15);
+		
+
 		this.add(weightFormattedTextField, gbc);
 		
 		
-		gbc.gridwidth = 1;
+		gbc.gridwidth = 3;
+		gbc.anchor = GridBagConstraints.WEST;
 		gbc.gridx = 0;
 		gbc.gridy = 19;
+		
 		clearButton = new JButton("Clear");
 		clearButton.setName("clear");
 		clearButton.addActionListener(new InnerActionListener());
 		clearButton.setBackground(Color.YELLOW);
 		this.add(clearButton, gbc);
 		
-		
-		gbc.gridx = 2;
+		gbc.anchor = GridBagConstraints.EAST;
+		gbc.gridx = 0;
 		gbc.gridy = 19;
+		
 		submitButton = new JButton("Submit");
 		submitButton.setName("submit");
 		submitButton.addActionListener(new InnerActionListener());
@@ -333,6 +363,7 @@ public class CustomJFrame extends JFrame
 		this.validate();
 		this.pack();
 		this.setVisible(true);
+		
 	}
 	
 	/**
@@ -397,7 +428,7 @@ public class CustomJFrame extends JFrame
 					info[11] = weightFormattedTextField.getText();
 					if(info[11].isEmpty())
 							info[11] = null;
-					
+					clearForm();
 					
 					try {
 						fileHandler.writeResults(info[0] + "," + info[1] + "," + info[2] + "," + info[3] + "," + info[4] + "," + info[5] + "," + info[6] + "," + info[7] + "," + info[8] + "," + info[9] + "," + info[10] + "," + info[11]);

@@ -22,12 +22,7 @@ public class Project4 {
 	 */
 	public static void main(String[] args) {
 	
-			try {
-				CustomJFrame frame = new CustomJFrame();
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
+		CustomJFrame frame = new CustomJFrame();
 
 	}
 
