@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>myMovies Xpress! - Cart</title>
+		<link rel="stylesheet" type="text/css" href="../css/mySite.css">
+		<script src="./script.js"></script>
+	</head>
+	<body>
+		<h3>Welcome, <?= $_SESSION["displayName"] ?> (<a href="javascript: confirmLogout()">logout</a>)</h3>
+		<h1>myMovies Xpress!</h1>
+<!-- DO NOT REMOVE OR MODIFY THE CODE OR PLACE YOUR CODE ABOVE THIS LINE -->
+		<?php if (empty($movies)): ?>
+		<p>Add some movies to your shopping cart.</p>
+
+		<?php else: ?>
+        <p>There is currently <?= count($movies) ?> movie(s) in your shopping cart.</p>
+		<table>
+			<thead>
+				<tr>
+					<th>Poster</th>
+					<th>Title (Year)</th>
+					<th>More Info</th>
+					<th>Remove Movie</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($movies as $movieID): ?>
+					<?php
+					// Get movie data for each movieID
+					$movie = getMovieData($movieID);
+					if ($movie):
+					?>
+						<tr>
+							<td><img src="<?= htmlspecialchars($movie['Poster']) ?>" height="100" alt="Movie Poster"></td>
+							<td><a href="https://www.imdb.com/title/<?= htmlspecialchars($movie['IMDB_ID']) ?>" target="_blank"><?= htmlspecialchars($movie['Title']) ?> (<?= htmlspecialchars($movie['Year']) ?>)</a></td>
+							<td><a href="javascript:void(0);" onclick="displayMovieInformation('<?= htmlspecialchars($movie['ID']) ?>');">View More Info</a></td>
+							<td><a href="javascript: confirmRemove('<?= htmlspecialchars($movie['Title']) ?>', '<?= htmlspecialchars($movie['ID']) ?>')">X</a></td>
+						</tr>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+
+		<?php endif ?>
+
+		<p><input type="button" value="Add Movie" onclick="window.location.href='./search.php'" /> <input type="button" value="Checkout" onclick="javascript: confirmCheckout()" /></p>
+<!-- DO NOT REMOVE OR MODIFY THE CODE OR PLACE YOUR CODE BELOW THIS LINE -->
+		<!-- This code is used by the movieInfo.php file provided by the professor -->
+		<div id='modalWindow' class='modal'>
+			<div id='modalWindowContent' class='modal-content'>
+			</div>
+		</div>
+	</body>
+</html>
